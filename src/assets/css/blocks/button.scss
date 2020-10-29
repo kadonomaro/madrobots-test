@@ -1,0 +1,25 @@
+.button {
+	margin: 0;
+	padding: 6px 12px;
+	font-size: inherit;
+	font-family: inherit;
+	background-color: transparent;
+	background-size: 25px;
+	border: 2px solid $color-accent;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.1s ease-in;
+	outline: none;
+	&:hover,
+	&:focus {
+		background-color: $color-accent;
+	}
+	&:hover:disabled {
+		background-color: transparent;
+	}
+	&:disabled {
+		opacity: 0.7;
+		cursor: initial;
+		border-color: $color-medium-gray;
+	}
+}
