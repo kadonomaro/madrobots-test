@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import { validate } from '@/validation';
+import { validate } from '@/libs/validation';
 
 export default {
 	name: 'FormComponent',

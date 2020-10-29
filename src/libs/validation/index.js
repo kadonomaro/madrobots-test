@@ -3,8 +3,12 @@ import { regex } from './regex';
 export function validate(value, options = []) {
 	if (options.length) {
 		return options.map((validator) => {
-			return validators[validator](value);
-		}).find(validator => !validator.valid) || { valid: true, message: '' };
+			try {
+				return validators[validator](value);
+			} catch (error) {
+				console.error(`Validator '${validator}' does not exist`);
+			}
+		}).find(validator => validator ? !validator.valid : false) || { valid: true, message: '' };
 	}
 }
 
