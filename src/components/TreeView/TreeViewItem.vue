@@ -3,9 +3,10 @@
     <div class="tree-item__title" @click="toggle">{{ item.Name }}</div>
     <ul class="tree-item__list" v-show="isOpen" v-if="hasChild">
       <TreeViewItem
-				v-for="child in item.Childs"
+				v-for="child in childs"
 				:key="child.Id"
 				:item="child"
+				:open="open"
 			/>
     </ul>
   </li>
@@ -40,7 +41,11 @@ export default {
   computed: {
     hasChild() {
       return this.item.Childs && this.item.Childs.length;
-    }
+		},
+
+		childs() {
+			return [...this.item.Childs].sort((a, b) => a.Order - b.Order);
+		}
   },
 };
 </script>

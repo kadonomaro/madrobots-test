@@ -1,21 +1,21 @@
 <template>
 	<ul class="tree-view">
-		<TreeViewItem :item="dropdown" :open="false" />
+		<TreeViewItem :item="list" :open="false" />
 	</ul>
 </template>
 
 <script>
 import TreeViewItem from './TreeViewItem';
-import dropdown from '@/assets/data/dropdown.json';
 
 export default {
 	name: 'TreeView',
 	components: {
 		TreeViewItem
 	},
-	data() {
-		return {
-			dropdown
+	props: {
+		list: {
+			type: Object,
+			requred: true
 		}
 	}
 }
