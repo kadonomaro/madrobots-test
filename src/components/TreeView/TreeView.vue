@@ -1,6 +1,6 @@
 <template>
 	<ul class="tree-view">
-		<TreeViewItem :item="list" :open="false" />
+		<TreeViewItem :item="list"/>
 	</ul>
 </template>
 
