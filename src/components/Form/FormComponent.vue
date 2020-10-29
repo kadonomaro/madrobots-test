@@ -82,7 +82,12 @@ export default {
 
 			if (Object.values(this.errors).every(error => error.valid)) {
 				this.$emit('on-submit', this.form);
+				this.clear();
 			}
+		},
+
+		clear() {
+			Object.keys(this.form).forEach(key => this.form[key] = '');
 		}
 	}
 }

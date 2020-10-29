@@ -1,17 +1,17 @@
 <template>
-  <div class="home">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/form">Form</router-link> |
-			<router-link to="/dropdown">Dropdown</router-link> |
-			<router-link to="/list">List</router-link>
-    </div>
+  <div class="page">
+		<AppNavigation />
+		<h1 class="page__title">Тестовое задание</h1>
   </div>
 </template>
 
 <script>
+import AppNavigation from '@/components/blocks/AppNavigation';
 
 export default {
-  name: 'HomePage'
+	name: 'HomePage',
+	components: {
+		AppNavigation
+	},
 }
 </script>
