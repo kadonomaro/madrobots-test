@@ -4,25 +4,31 @@
 			<input
 				type="text"
 				class="input form__field"
+				:class="{ 'input--error': !errors.name.valid }"
 				placeholder="Имя"
 				v-model="form.name"
 			>
+			<span class="form__error" v-if="!errors.name.valid">{{errors.name.message}}</span>
 		</label>
 		<label class="form__label">
 			<input
 				type="email"
 				class="input form__field"
+				:class="{ 'input--error': !errors.email.valid }"
 				placeholder="Почта"
 				v-model="form.email"
 			>
+			<span class="form__error" v-if="!errors.email.valid">{{errors.email.message}}</span>
 		</label>
 		<label class="form__label">
 			<input
 				type="tel"
 				class="input form__field"
+				:class="{ 'input--error': !errors.phone.valid }"
 				placeholder="Телефон"
 				v-model="form.phone"
 			>
+			<span class="form__error" v-if="!errors.phone.valid">{{errors.phone.message}}</span>
 		</label>
 		<label class="form__label">
 			<textarea
@@ -39,6 +45,8 @@
 </template>
 
 <script>
+import { validate } from '@/validation';
+
 export default {
 	name: 'FormComponent',
 	props: {
@@ -54,12 +62,19 @@ export default {
 				email: '',
 				phone: '',
 				comment: ''
+			},
+			errors: {
+				name: { valid: true, message: '' },
+				email: { valid: true, message: '' },
+				phone: { valid: true, message: '' }
 			}
 		}
 	},
 	methods: {
 		submitHandler() {
-			console.log(this.form);
+			this.errors.name = validate(this.form.name, ['required']);
+			this.errors.email = validate(this.form.email, ['required', 'email']);
+			this.errors.phone = validate(this.form.phone, ['required', 'phone']);
 		}
 	}
 }
@@ -68,9 +83,10 @@ export default {
 <style lang="scss">
 	.form {
 		&__label {
+			position: relative;
 			display: block;
 			&:not(:last-child) {
-				margin-bottom: 10px;
+				margin-bottom: 20px;
 			}
 		}
 		&__field {
@@ -78,6 +94,22 @@ export default {
 		}
 		&__field--type--textarea {
 			min-height: 100px;
+		}
+		&__error {
+			position: absolute;
+			z-index: 9;
+			left: 0;
+			bottom: 3px;
+			width: 100%;
+			padding: 3px 6px;
+			color: #ffffff;
+			font-size: 14px;
+			line-height: 12px;
+			background-color: $color-danger;
+			border-bottom-left-radius: 5px;
+			border-bottom-right-radius: 5px;
+			transform: translateY(100%);
+			box-sizing: border-box;
 		}
 	}
 </style>
