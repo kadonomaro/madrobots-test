@@ -34,9 +34,11 @@
 			<textarea
 				rows="5"
 				class="input form__field form__field--type--textarea"
+				:class="{ 'input--error': !errors.comment.valid }"
 				placeholder="Комментарий"
 				v-model="form.comment"
 			></textarea>
+			<span class="form__error" v-if="!errors.comment.valid">{{errors.comment.message}}</span>
 		</label>
 		<div class="form__controls">
 			<button class="button form__button" type="submit">Отправить</button>
@@ -66,7 +68,8 @@ export default {
 			errors: {
 				name: { valid: true, message: '' },
 				email: { valid: true, message: '' },
-				phone: { valid: true, message: '' }
+				phone: { valid: true, message: '' },
+				comment: { valid: true, message: '' }
 			}
 		}
 	},
@@ -75,6 +78,11 @@ export default {
 			this.errors.name = validate(this.form.name, ['required']);
 			this.errors.email = validate(this.form.email, ['required', 'email']);
 			this.errors.phone = validate(this.form.phone, ['required', 'phone']);
+			this.errors.comment = validate(this.form.comment, ['required']);
+
+			if (Object.values(this.errors).every(error => error.valid)) {
+				this.$emit('on-submit', this.form);
+			}
 		}
 	}
 }
@@ -85,9 +93,7 @@ export default {
 		&__label {
 			position: relative;
 			display: block;
-			&:not(:last-child) {
-				margin-bottom: 20px;
-			}
+			margin-bottom: 20px;
 		}
 		&__field {
 			width: 100%;
