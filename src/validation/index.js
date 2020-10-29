@@ -1,15 +1,16 @@
+import { regex } from './regex';
+
 export function validate(value, options = []) {
 	if (options.length) {
 		return options.map(validator => {
 			return validators[validator](value);
-		});
+		}).find(validator => !validator.valid) || { valid: true, message: '' };
 	}
 }
 
 
 const validators = {
 	required(value) {
-		console.log('validators required works');
 		if (!value) {
 			return { valid: false, message: 'Поле обязательно для заполнения' }
 		}
@@ -17,16 +18,14 @@ const validators = {
 	},
 
 	email(value) {
-		console.log('validators email works');
-		if (!value.match(/^\w+([.-]?\w+)_@\w+(_[_.-]?\w+)_(.\w{2,3})+$/)) {
+		if (!value.match(regex.email)) {
 			return { valid: false, message: 'Введите корректный адрес электронной почты.' };
 		}
 		return { valid: true, message: '' }
 	},
 
 	phone(value) {
-		console.log('validators phone works');
-		if (!value.match(/^[+][(]?[0-9]{1,3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,7}$/gm)) {
+		if (!value.match(regex.phone)) {
 			return { valid: false, message: 'Введите корректный номер телефона.' };
 		}
 		return { valid: true, message: '' }
