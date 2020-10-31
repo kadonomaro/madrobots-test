@@ -32,7 +32,7 @@
 		</label>
 		<label class="form__label">
 			<textarea
-				rows="7"
+				rows="5"
 				class="input form__field form__field--type--textarea"
 				:class="{ 'input--error': !errors.comment.valid }"
 				placeholder="Комментарий"
@@ -82,12 +82,7 @@ export default {
 
 			if (Object.values(this.errors).every(error => error.valid)) {
 				this.$emit('on-submit', this.form);
-				this.clear();
 			}
-		},
-
-		clear() {
-			Object.keys(this.form).forEach(key => this.form[key] = '');
 		}
 	},
 	watch: {
@@ -124,7 +119,7 @@ export default {
 			position: absolute;
 			z-index: 9;
 			left: 0;
-			bottom: 8px;
+			bottom: 6px;
 			width: 100%;
 			padding: 3px 6px;
 			color: #ffffff;
