@@ -32,7 +32,7 @@
 		</label>
 		<label class="form__label">
 			<textarea
-				rows="5"
+				rows="7"
 				class="input form__field form__field--type--textarea"
 				:class="{ 'input--error': !errors.comment.valid }"
 				placeholder="Комментарий"
@@ -89,6 +89,20 @@ export default {
 		clear() {
 			Object.keys(this.form).forEach(key => this.form[key] = '');
 		}
+	},
+	watch: {
+		'form.name': function(value) {
+			this.errors.name = validate(value.trim(), ['required']);
+		},
+		'form.email': function(value) {
+			this.errors.email = validate(value.trim(), ['required', 'email']);
+		},
+		'form.phone': function(value) {
+			this.errors.phone = validate(value.trim(), ['required', 'phone']);
+		},
+		'form.comment': function(value) {
+			this.errors.comment = validate(value.trim(), ['required']);
+		}
 	}
 }
 </script>
@@ -98,7 +112,7 @@ export default {
 		&__label {
 			position: relative;
 			display: block;
-			margin-bottom: 20px;
+			margin-bottom: 15px;
 		}
 		&__field {
 			width: 100%;
@@ -110,7 +124,7 @@ export default {
 			position: absolute;
 			z-index: 9;
 			left: 0;
-			bottom: 3px;
+			bottom: 8px;
 			width: 100%;
 			padding: 3px 6px;
 			color: #ffffff;

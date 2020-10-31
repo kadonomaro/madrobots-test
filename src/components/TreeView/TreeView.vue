@@ -1,5 +1,5 @@
 <template>
-	<ul class="tree-view">
+	<ul class="tree-view" v-if="isEmpty">
 		<TreeViewItem :item="list"/>
 	</ul>
 </template>
@@ -16,6 +16,11 @@ export default {
 		list: {
 			type: Object,
 			requred: true
+		}
+	},
+	computed: {
+		isEmpty() {
+			return !!Object.keys(this.list).length;
 		}
 	}
 }
