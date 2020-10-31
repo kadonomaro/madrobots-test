@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import data from '@/assets/data/dropdown.json';
 
 Vue.use(Vuex)
 
@@ -14,7 +13,9 @@ export default new Vuex.Store({
 		}
   },
   actions: {
-		setData({ commit }) {
+		async fetchLocaleData({ commit }) {
+			const response = await fetch('/dropdown.json');
+			const data = await response.json();
 			commit('SET_DATA', data);
 		}
 	},
@@ -23,4 +24,4 @@ export default new Vuex.Store({
 			return state.data;
 		}
 	}
-})
+});

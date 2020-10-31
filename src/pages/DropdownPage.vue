@@ -18,7 +18,7 @@ export default {
 		TreeView
 	},
 	mounted() {
-		this.$store.dispatch('setData');
+		this.$store.dispatch('fetchLocaleData');
 	},
 	computed: {
 		...mapGetters(['getData'])
