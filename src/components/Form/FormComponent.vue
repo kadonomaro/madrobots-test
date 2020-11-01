@@ -79,10 +79,23 @@ export default {
 			this.errors.email = validate(this.form.email, ['required', 'email']);
 			this.errors.phone = validate(this.form.phone, ['required', 'phone']);
 			this.errors.comment = validate(this.form.comment, ['required']);
-
-			if (Object.values(this.errors).every(error => error.valid)) {
-				this.$emit('on-submit', this.form);
+			if (this.isValid) {
+				this.submit();
 			}
+		},
+
+		async submit() {
+			try {
+				const response = await fetch(this.action);
+				this.$emit('on-success', this.form);
+			} catch (error) {
+				console.warn(error);
+			}
+		}
+	},
+	computed: {
+		isValid() {
+			return Object.values(this.errors).every(error => error.valid);
 		}
 	},
 	watch: {

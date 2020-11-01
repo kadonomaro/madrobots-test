@@ -1,6 +1,10 @@
 <template>
 	<div class="order">
-		<FormComponent :action="'/'" @on-submit="submitHandler" v-if="!isSended" />
+		<FormComponent
+			:action="'https://reqres.in/api/users'"
+			@on-success="successHandler"
+			v-if="!isSended"
+		/>
 		<h2 class="order__title" v-else>Заявка успешно отправлена</h2>
 	</div>
 </template>
@@ -19,13 +23,8 @@ export default {
 		}
 	},
 	methods: {
-		submitHandler(payload) {
-			fetch('http://jsonplaceholder.typicode.com/posts', {
-				method: 'POST'
-			}).then(response => {
-				console.log(response);
-				this.isSended = true;
-			});
+		successHandler(payload) {
+			this.isSended = true;
 		}
 	}
 }
