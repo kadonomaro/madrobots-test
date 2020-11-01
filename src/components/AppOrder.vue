@@ -1,7 +1,7 @@
 <template>
 	<div class="order">
 		<FormComponent
-			:action="'https://reqres.in/api/users'"
+			:options="{ action: 'https://reqres.in/api/users', method: 'POST' }"
 			@on-success="successHandler"
 			v-if="!isSended"
 		/>

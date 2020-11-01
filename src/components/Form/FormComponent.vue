@@ -1,5 +1,5 @@
 <template>
-	<form :action="action" class="form" @submit.prevent="submitHandler">
+	<form :action="options.action" class="form" @submit.prevent="submitHandler">
 		<label class="form__label">
 			<input
 				type="text"
@@ -52,9 +52,15 @@ import { validate } from '@/libs/validation';
 export default {
 	name: 'FormComponent',
 	props: {
-		action: {
-			type: String,
-			required: true
+		options: {
+			type: Object,
+			required: true,
+			default: function() {
+				return {
+					action: '/',
+					method: 'POST'
+				}
+			}
 		}
 	},
 	data() {
@@ -86,7 +92,9 @@ export default {
 
 		async submit() {
 			try {
-				const response = await fetch(this.action);
+				const response = await fetch(this.options.action, {
+					method: this.options.method
+				});
 				this.$emit('on-success', this.form);
 			} catch (error) {
 				console.warn(error);
