@@ -8,22 +8,34 @@ const routes = [
   {
     path: '/',
     name: 'HomePage',
-    component: HomePage
+		component: HomePage,
+		meta: {
+			title: 'Главная'
+		}
   },
   {
     path: '/form',
     name: 'FormPage',
-    component: () => import(/* webpackChunkName: "form" */ '../pages/FormPage.vue')
+		component: () => import(/* webpackChunkName: "form" */ '../pages/FormPage.vue'),
+		meta: {
+			title: 'Форма'
+		}
 	},
 	{
     path: '/list',
     name: 'ListPage',
-    component: () => import(/* webpackChunkName: "list" */ '../pages/ListPage.vue')
+		component: () => import(/* webpackChunkName: "list" */ '../pages/ListPage.vue'),
+		meta: {
+			title: 'Выпадающий список'
+		}
 	},
 	{
     path: '/dropdown',
     name: 'DropdownPage',
-    component: () => import(/* webpackChunkName: "dropdown" */ '../pages/DropdownPage.vue')
+		component: () => import(/* webpackChunkName: "dropdown" */ '../pages/DropdownPage.vue'),
+		meta: {
+			title: 'Список лет'
+		}
   }
 ];
 

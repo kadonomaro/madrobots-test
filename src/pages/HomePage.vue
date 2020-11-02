@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-		<AppNavigation />
+		<AppNavigation :excludes="['HomePage']"/>
 		<h1 class="page__title">Тестовое задание</h1>
   </div>
 </template>

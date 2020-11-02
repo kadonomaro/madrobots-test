@@ -15,7 +15,7 @@ export default {
 	props: {
 		list: {
 			type: Object,
-			requred: true
+			required: true
 		}
 	},
 	computed: {

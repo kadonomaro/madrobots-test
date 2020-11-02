@@ -2,7 +2,7 @@
 	<nav class="navigation">
 		<ul class="navigation__list">
 			<li class="navigation__item" v-for="route in routes" :key="route.name">
-				<router-link class="navigation__link" :to="{ name: route.name }">{{route.title}}</router-link>
+				<router-link class="navigation__link" :to="{ name: route.name }">{{route.meta.title}}</router-link>
 			</li>
 		</ul>
 	</nav>
@@ -11,13 +11,18 @@
 <script>
 export default {
 	name: 'AppNavigation',
-	data() {
-		return {
-			routes: [
-				{ title: 'Форма', name: 'FormPage' },
-				{ title: 'Выпадающий список', name: 'DropdownPage' },
-				{ title: 'Список лет', name: 'ListPage' }
-			]
+	props: {
+		excludes: {
+			type: Array,
+			required: false,
+			default: () => []
+		}
+	},
+	computed: {
+		routes() {
+			return this.$router.options.routes.filter((route) => {
+				return !this.excludes.includes(route.name);
+			});
 		}
 	}
 }
